@@ -4,29 +4,32 @@
 #include <ctime>
 using namespace std;
 //---------------------------------------------
-void fill(double*p,const int N,double a,double b, double r){
+void fill(double*p,const int N){
 	for (int i=0;i<N;i++){
-  b = RAND_MAX;
-  a = rand();
-  r = a/b;
-	p[i]=r;}
+	p[i]=(double) rand()/(double)RAND_MAX;
+        cout << p[i] << endl;
+        }
 }
 void zaehle(const int N, double*p,double& mean,double& var){	
 	for (int i=0;i<N;i++){	
-		mean += p[i]*(1/N);
-		var += pow(p[i]-mean,2)*(1/N);}
-	}
-//--------------------------------------------------
+		mean += p[i];
+		mean /=N;
+            
+        }
+        for( int i=0; i<N; i++){
+        
+                var += pow(p[i]-mean,2);
+                var /= N;
+            
+        }
+}
 
 int main(){
    srand(time(NULL));
    const int N = 100;
    double p[N];
    double mean, var;
-   double b ;
-   double a ;
-   double r ;
-fill(p,N,a,b,r);
+fill(p,N);
 zaehle(N,p,mean,var);
 
    // Some lines here....
